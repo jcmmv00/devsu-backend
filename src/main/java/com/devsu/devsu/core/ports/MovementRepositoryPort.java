@@ -14,4 +14,6 @@ public interface MovementRepositoryPort {
 
     public List<Movement> getMovementsByRangeDate(Date startDate, Date endDate, Long accountId);
 
+    public List<Movement> getAllMovements();
+
 }

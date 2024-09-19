@@ -72,4 +72,9 @@ public class MovementServiceHandler implements MovementService {
 
         return this.movementRepository.getMovementsByRangeDate(dateA, dateB, account.getAccountId());
     }
+
+	@Override
+	public List<Movement> getAllMovements() throws AccountNotFoundException {
+		return this.movementRepository.getAllMovements();
+	}
 }

@@ -15,4 +15,5 @@ public interface MovementService {
 
     List<Movement> queryMovementsBydateRange(Date dateA, Date dateB, String accountNumber) throws AccountNotFoundException;
 
+    List<Movement> getAllMovements() throws AccountNotFoundException;
 }

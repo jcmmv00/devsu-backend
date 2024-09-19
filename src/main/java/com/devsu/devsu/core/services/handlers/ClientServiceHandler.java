@@ -1,6 +1,8 @@
 package com.devsu.devsu.core.services.handlers;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 import com.devsu.devsu.core.exceptions.ClientAlreadyExistException;
@@ -55,5 +57,9 @@ public class ClientServiceHandler implements ClientService {
         } else {
             throw new ClientNotFoundException(client.getIdentification());
         }
+    }
+
+    public List<Client> getAllClients() {
+        return clientRepositoryPort.findClients();
     }
 }

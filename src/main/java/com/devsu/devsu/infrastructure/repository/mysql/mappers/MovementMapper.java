@@ -16,6 +16,7 @@ public class MovementMapper implements Mapper<Movement, MovementEntity> {
         movement.setMovementId(movementEntity.getMovementId());
         movement.setMovementType(movementEntity.getMovementType());
         movement.setQuantity(movementEntity.getQuantity());
+        movement.setAccount(new AccountMapper().mapDatabaseEntityToCoreEntity(movementEntity.getAccount()));
         return movement;
     }
 

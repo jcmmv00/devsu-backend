@@ -1,5 +1,7 @@
 package com.devsu.devsu.application.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,7 @@ public class ClientController {
         client.setName(clientCreationDTO.getName());
         client.setPassword(clientCreationDTO.getPassword());
         client.setTelephone(clientCreationDTO.getTelephone());
+        client.setState(clientCreationDTO.isState());
         return ResponseEntity.created(null).body(clientService.createClient(client));
     }
 
@@ -56,7 +59,7 @@ public class ClientController {
         client.setName(clientUpdateDTO.getName());
         client.setPassword(clientUpdateDTO.getPassword());
         client.setTelephone(clientUpdateDTO.getTelephone());
-
+        client.setState(clientUpdateDTO.isState());
         if (clientService.updateClient(client)) {
             return ResponseEntity.ok().build();
         } else {
@@ -68,6 +71,11 @@ public class ClientController {
     public ResponseEntity<Client> getClient(@PathVariable String identification) throws ClientNotFoundException {
         Client client = clientService.getClient(identification);
         return ResponseEntity.ok(client);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Client>> getAllClients() {
+        return ResponseEntity.ok(clientService.getAllClients());
     }
 
     @DeleteMapping("/{identification}")

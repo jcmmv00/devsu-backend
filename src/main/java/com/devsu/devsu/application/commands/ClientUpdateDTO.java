@@ -23,53 +23,78 @@ public class ClientUpdateDTO {
     @NotBlank
     @Size(min = 8, max = 16)
     private String password;
+    private boolean state;
 
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public Integer getAge() {
         return age;
     }
+
     public void setAge(Integer age) {
         this.age = age;
     }
+
     public Gender getGender() {
         return gender;
     }
+
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
     public String getIdentification() {
         return identification;
     }
+
     public void setIdentification(String identification) {
         this.identification = identification;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getTelephone() {
         return telephone;
     }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
 }

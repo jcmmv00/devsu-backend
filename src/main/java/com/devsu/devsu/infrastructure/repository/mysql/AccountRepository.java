@@ -5,7 +5,10 @@ import com.devsu.devsu.core.ports.AccountRepositoryPort;
 import com.devsu.devsu.infrastructure.repository.entities.AccountEntity;
 import com.devsu.devsu.infrastructure.repository.entities.ClientEntity;
 import com.devsu.devsu.infrastructure.repository.mysql.mappers.AccountMapper;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -68,6 +71,12 @@ public class AccountRepository implements AccountRepositoryPort {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<Account> getAllAcounts() {
+        return ((List<AccountEntity>) mysqlAccountRepository.findAll()).stream()
+                .map(accountMapper::mapDatabaseEntityToCoreEntity).collect(Collectors.toList());
     }
 
 }

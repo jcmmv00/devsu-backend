@@ -1,5 +1,7 @@
 package com.devsu.devsu.application.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +59,10 @@ public class AccountController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        return ResponseEntity.ok(accountService.getAccounts());
     }
 }

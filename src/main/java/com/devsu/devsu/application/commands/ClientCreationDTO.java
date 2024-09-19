@@ -23,6 +23,8 @@ public class ClientCreationDTO {
     @NotBlank
     @Size(min = 8, max = 16)
     private String password;
+    private boolean state;
+
 
     public String getName() {
         return name;
@@ -72,4 +74,12 @@ public class ClientCreationDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+    public boolean isState() {
+        return state;
+    }
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    
 }

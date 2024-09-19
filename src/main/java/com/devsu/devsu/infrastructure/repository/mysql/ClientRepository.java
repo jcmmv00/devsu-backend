@@ -1,6 +1,8 @@
 package com.devsu.devsu.infrastructure.repository.mysql;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class ClientRepository implements ClientRepositoryPort {
     public Optional<Client> findClientEntityByIdentification(String identificacion) {
         return mysqlClientRepository.findClientEntityByIdentification(identificacion)
                 .map(clientMapper::mapDatabaseEntityToCoreEntity);
+    }
+
+     @Override
+    public List<Client> findClients() {
+        return ((List<ClientEntity>) mysqlClientRepository.findAll()).stream()
+                .map(clientMapper::mapDatabaseEntityToCoreEntity).collect(Collectors.toList());
     }
 
     @Override

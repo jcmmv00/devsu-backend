@@ -15,6 +15,7 @@ public class AccountMapper implements Mapper<Account, AccountEntity> {
         account.setAccountNumber(u.getAccountNumber());
         account.setAccountType(u.getAccountType());
         account.setBalance(u.getBalance());
+        account.setState(u.isState());
         return account;
     }
 

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsu.devsu.application.commands.MovementCreationDTO;
+import com.devsu.devsu.application.query.MovementViewQuery;
 import com.devsu.devsu.core.exceptions.AccountNotFoundException;
 import com.devsu.devsu.core.exceptions.DailyLimitExceeded;
 import com.devsu.devsu.core.exceptions.MovementBalanceNotAvailableException;
@@ -51,11 +53,20 @@ public class MovementController {
 
     // ?date=01-01-2021,01-01-2022&accountNumber=123456
     @GetMapping("/report")
-    public ResponseEntity<List<Movement>> getReport(@RequestParam("date") String dateRange, @RequestParam("accountNumber") String accountNumber) throws AccountNotFoundException, ParseException {
+    public ResponseEntity<List<Movement>> getReport(@RequestParam("date") String dateRange,
+            @RequestParam("accountNumber") String accountNumber) throws AccountNotFoundException, ParseException {
         String[] dates = dateRange.split(",");
         Date dateA = new SimpleDateFormat("dd-MM-yyyy").parse(dates[0]);
         Date dateB = new SimpleDateFormat("dd-MM-yyyy").parse(dates[1]);
 
         return ResponseEntity.ok(movementService.queryMovementsBydateRange(dateA, dateB, accountNumber));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<MovementViewQuery>> getAllMovements() throws AccountNotFoundException {
+        List<MovementViewQuery> movements = movementService.getAllMovements().stream()
+                .map(m -> new MovementViewQuery(m.getMovementId(), m.getDate(), m.getQuantity(), m.getMovementType(),
+                        m.getAccount().getAccountNumber())).collect(Collectors.toList());
+        return ResponseEntity.ok(movements);
     }
 }

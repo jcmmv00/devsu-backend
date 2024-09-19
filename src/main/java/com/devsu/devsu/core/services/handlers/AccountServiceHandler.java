@@ -7,6 +7,8 @@ import com.devsu.devsu.core.services.ClientService;
 import com.devsu.devsu.core.model.Client;
 import com.devsu.devsu.core.ports.AccountRepositoryPort;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.devsu.devsu.core.exceptions.AccountNotFoundException;
@@ -53,5 +55,10 @@ public class AccountServiceHandler implements AccountService {
         } else {
             throw new AccountNotFoundException(accountNumber);
         }
+    }
+
+    @Override
+    public List<Account> getAccounts() {
+        return this.accountRepository.getAllAcounts();
     }
 }

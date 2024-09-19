@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.devsu.devsu.core.model.Movement;
 import com.devsu.devsu.core.model.enums.MovementType;
 import com.devsu.devsu.core.ports.MovementRepositoryPort;
+import com.devsu.devsu.infrastructure.repository.entities.MovementEntity;
 import com.devsu.devsu.infrastructure.repository.mysql.mappers.MovementMapper;
 
 @Service
@@ -34,9 +35,13 @@ public class MovementRepository implements MovementRepositoryPort {
 
     @Override
     public List<Movement> getMovementsByRangeDate(Date startDate, Date endDate, Long accountId) {
-        
+
         return mysqlMovementRepository.findMovementsByRangeDate(startDate, endDate, accountId).stream()
                 .map(movementMapper::mapDatabaseEntityToCoreEntity).toList();
     }
 
+    @Override
+    public List<Movement> getAllMovements() {
+        return ((List<MovementEntity>) mysqlMovementRepository.findAll()).stream().map(movementMapper::mapDatabaseEntityToCoreEntity).toList();
+    }
 }
